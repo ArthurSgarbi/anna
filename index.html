@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para você, Minha Anninha ❤️</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin: 10px;
+            animation: fadeIn 3s ease-in-out;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .heart {
+            font-size: 50px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        #counter {
+            font-size: 2em;
+            font-weight: bold;
+            margin-top: 10px;
+            animation: fadeIn 3s ease-in-out;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 90%;
+            word-wrap: break-word;
+            box-sizing: border-box;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: red;
+            opacity: 0.7;
+            border-radius: 50%;
+            top: -10px;
+            animation: fall linear infinite;
+        }
+
+        .photo {
+            width: 300px;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 15px;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Para você, Minha Anninha ❤️</h1>
+    <p>Eu te amo muito minha princesa, sempre vou te amar.</p>
+    <p>Minha bocó de mola!</p>
+    <div class="heart">💖</div>
+    
+    <img src="IMG-20240928-WA0060.jpg" alt="Foto de nós dois" class="photo">
+
+    <p>Estamos juntos há:</p>
+    <div id="counter">Calculando...</div>
+
+    <script>
+        function calcularTempo() {
+            const dataInicio = new Date(2023, 3, 10); // 10 de abril de 2023 (mês 3 porque começa do zero)
+            const agora = new Date();
+
+            // Calcular a diferença total em milissegundos
+            const diffEmMs = agora - dataInicio;
+            const diffEmDias = Math.floor(diffEmMs / (1000 * 60 * 60 * 24)); // converter para dias
+
+            // Cálculo preciso de anos, meses e dias
+            const anos = Math.floor(diffEmDias / 365.25);  // Considerando anos bissextos
+            const diasRestantes = diffEmDias % 365.25;
+            const meses = Math.floor(diasRestantes / 30.44); // Média de dias no mês (levando em conta a variação dos meses)
+            const dias = Math.floor(diasRestantes % 30.44);
+
+            // Calcular horas, minutos e segundos
+            const horas = agora.getHours();
+            const minutos = agora.getMinutes();
+            const segundos = agora.getSeconds();
+
+            // Exibir a diferença de tempo
+            document.getElementById("counter").innerText = 
+                `${anos} anos, ${meses} meses, ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos!`;
+        }
+
+        setInterval(calcularTempo, 1000);
+
+        function criarConfete() {
+            const confete = document.createElement("div");
+            confete.classList.add("confetti");
+            confete.style.left = Math.random() * 100 + "vw";
+            confete.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(confete);
+            setTimeout(() => { confete.remove(); }, 5000);
+        }
+
+        setInterval(criarConfete, 200);
+    </script>
+
+</body>
+</html>
